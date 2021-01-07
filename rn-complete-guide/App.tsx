@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View, TextInput, Button, ScrollView, FlatList} from 'react-native';
+import {StyleSheet, Text, View, Button, FlatList} from 'react-native';
 import GoalEntry from './components/GoalEntry/GoalEntry'
 import GoalInput from "./components/GoalInput/GoalInput";
 
 export default function App() {
 
     const [goalsList, setGoalsList] = useState<{ id: string, value: string }[]>([]);
+    const [viewGoalInput, setViewGoalInput] = useState<boolean>(false)
 
     const addNewGoal = (inputGoal: string) => {
         if (!!inputGoal) {
@@ -14,6 +15,7 @@ export default function App() {
                 value: inputGoal
             }, ...goalsList]);
         }
+        setViewGoalInput(!viewGoalInput)
     }
 
     const deleteGoal = (goalId: string) => {
@@ -26,7 +28,8 @@ export default function App() {
         <View style={styles.screen}>
             <View style={styles.headerView}>
                 <Text style={styles.title}>Goal annotator!</Text>
-                <GoalInput addNewGoal={addNewGoal}/>
+                <Button title={"Add a new goal"} onPress={()=>setViewGoalInput(!viewGoalInput)}/>
+                <GoalInput viewGoalInput={viewGoalInput} cancelAddGoal={()=>setViewGoalInput(false)} addNewGoal={addNewGoal}/>
             </View>
             <FlatList
                 style={styles.goalsList}

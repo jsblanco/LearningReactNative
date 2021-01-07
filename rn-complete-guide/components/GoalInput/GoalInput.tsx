@@ -1,7 +1,7 @@
 import React, {useState} from 'react'
-import {Button, StyleSheet, Text, TextInput, View} from "react-native";
+import {Button, StyleSheet, Text, TextInput, View, Modal} from "react-native";
 
-export default function GoalInput(props: { addNewGoal: (e: string) => void }) {
+export default function GoalInput(props: { viewGoalInput: boolean, cancelAddGoal: () => void, addNewGoal: (e: string) => void }) {
 
     const [inputGoal, setInputGoal] = useState("")
     const addNewGoal = () => {
@@ -10,33 +10,59 @@ export default function GoalInput(props: { addNewGoal: (e: string) => void }) {
     }
 
     return (
-        <View style={styles.inputView}>
-            <TextInput style={styles.goalInput}
-                       value={inputGoal}
-                       onChangeText={goal => setInputGoal(goal)}
-                       placeholder="Course goal"/>
-            <Button
-                onPress={addNewGoal}
-                title="Add goal!"/>
-        </View>
+        <Modal visible={props.viewGoalInput}>
+            <View style={styles.inputView}>
+                <Text style={styles.title}>Add a new goal</Text>
+                <TextInput
+                    style={styles.goalInput}
+                    value={inputGoal}
+                    onChangeText={goal => setInputGoal(goal)}
+                    placeholder="Course goal"/>
+                <View style={styles.actionsRow}>
+                    <View style={{width: "40%"}}>
+                        <Button
+                            color="red"
+                            onPress={props.cancelAddGoal}
+                            title="   Cancel   "/>
+                    </View>
+                    <View style={{width: "40%"}}>
+                        <Button
+                            onPress={addNewGoal}
+                            title="  Add goal  "/>
+                    </View>
+                </View>
+            </View>
+        </Modal>
     )
 
 }
 
 const styles = StyleSheet.create({
     inputView: {
-        flexDirection: 'row',
-        width: "100%",
+        flex: 1,
         paddingHorizontal: 20,
-        justifyContent: 'space-between',
+        justifyContent: 'center',
         alignItems: 'center',
+    },
+    title: {
+        marginTop: -100,
+        marginBottom: 30,
+        fontSize: 25,
+        fontWeight: "bold",
     },
     goalInput: {
         borderWidth: 1,
         borderColor: '#000',
-        width: '70%',
+        marginBottom: 50,
+        paddingHorizontal: 20,
+        width: '100%',
         padding: 5,
         borderRadius: 10,
         backgroundColor: '#eee'
     },
+    actionsRow: {
+        flexDirection: "row",
+        width: "100%",
+        justifyContent: "space-evenly"
+    }
 });
