@@ -9,16 +9,15 @@ export default function App() {
     const [viewGoalInput, setViewGoalInput] = useState<boolean>(false)
 
     const addNewGoal = (inputGoal: string) => {
-        if (!!inputGoal) {
-            setGoalsList(goalsList => [{
+        !!inputGoal && setGoalsList(goalsList => [{
                 id: new Date().getTime() + "",
                 value: inputGoal
             }, ...goalsList]);
-        }
         setViewGoalInput(!viewGoalInput)
     }
 
     const deleteGoal = (goalId: string) => {
+        console.log('Deleting: '+goalId)
         setGoalsList(goalsList =>
             goalsList.filter(goal => goal.id != goalId))
     }

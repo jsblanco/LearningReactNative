@@ -34,7 +34,6 @@ export default function GoalInput(props: { viewGoalInput: boolean, cancelAddGoal
             </View>
         </Modal>
     )
-
 }
 
 const styles = StyleSheet.create({
@@ -52,7 +51,7 @@ const styles = StyleSheet.create({
     },
     goalInput: {
         borderWidth: 1,
-        borderColor: '#000',
+        borderColor: '#424242',
         marginBottom: 50,
         paddingHorizontal: 20,
         width: '100%',
