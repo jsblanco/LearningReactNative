@@ -1,14 +1,25 @@
 import React, {useState} from 'react';
+import {StyleSheet, Text, View} from 'react-native';
+import { useFonts } from 'expo-font';
+import AppLoading from 'expo-app-loading';
+
 import Header from './pages/components/Header'
 import StartGamePage from "./pages/StartGamePage";
 import GamePage from "./pages/GamePage";
 import GameOverPage from "./pages/GameOverPage";
-import {StyleSheet, Text, View} from 'react-native';
 import colors from "./constants/colors";
+
 
 export default function App() {
     const [userNumber, setUserNumber] = useState(0)
     const [roundsUntilGuess, setRoundsUntilGuess] = useState(0);
+    const [fontsLoaded] = useFonts({
+        'openSans': require('./assets/fonts/OpenSans-Regular.ttf'),
+        'openSansBold': require('./assets/fonts/OpenSans-Bold.ttf'),
+        // 'inconsolata': require('./assets/fonts/Inconsolata-ExtraCondensed.ttf'),
+        // 'inconsolataBold': require('./assets/fonts/Inconsolata-ExpandedBlack.ttf')
+    });
+
     const startGameHandler = (selectedNumber: number) => {
         setUserNumber(selectedNumber)
     }
@@ -22,7 +33,7 @@ export default function App() {
         setRoundsUntilGuess(roundsPlayed)
     }
 
-    const restartGame = () =>{
+    const restartGame = () => {
         setUserNumber(0);
         setRoundsUntilGuess(0);
     }
@@ -34,13 +45,18 @@ export default function App() {
         content = <GameOverPage playedRounds={roundsUntilGuess} userNumber={userNumber} restart={restartGame}/>
     }
 
-    return (
-        <View style={styles.screen}>
-            <Header title="Uncle Jorge's Guess a Number Game Extraordinaire!"/>
-            {content}
-        </View>
-    );
+
+    if (!fontsLoaded) {
+        return <AppLoading/>;
+    } else {
+        return (
+            <View style={styles.screen}>
+                <Header title="Uncle Jorge's Extraordinaire Number Guesser!"/>
+                {content}
+            </View>
+        );
 }
+    }
 
 const styles = StyleSheet.create({
     screen: {

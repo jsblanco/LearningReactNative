@@ -1,8 +1,9 @@
 import React, {useState, useRef, useEffect} from "react";
 import {View, StyleSheet, Button, Alert} from 'react-native';
 import Text from './components/Text'
-import NumberContainer from "./components/NumberContainer";
 import Card from "./components/Card";
+import NumberContainer from "./components/NumberContainer";
+import DefaultStyles from '../constants/default-styles';
 
 
 const generateRandomNumber = (min: number, max: number, exclude: number): number => {
@@ -45,7 +46,7 @@ const GamePage = (props: any) => {
             <Text>Is this your number?</Text>
             <NumberContainer>{currentGuess}</NumberContainer>
             <Card style={styles.card}>
-                <Text style={{textAlign: 'center'}}>Your number is...</Text>
+                <Text style={{textAlign: 'center', ...DefaultStyles.p}}>Your number is...</Text>
                 <View style={styles.actionsRow}>
                     <View style={{flex: 1, paddingRight: 5}}>
                         <Button title={'Lower'} onPress={() => isUserNumberHigherThanGuess(false)}/>

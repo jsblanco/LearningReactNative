@@ -17,6 +17,8 @@ const NumberContainer = (props: { children: React.ReactNode }) => {
 const styles = StyleSheet.create({
     container: {
         borderWidth: 2,
+        height: 50,
+        width: 50,
         borderColor: Color.tertiary,
         borderRadius: 50,
         paddingVertical: 5,

@@ -14,5 +14,6 @@ const styles = StyleSheet.create({
     text: {
         color: 'white',
         paddingBottom: 5,
-    }
+        fontFamily: 'openSans'
+    },
 })

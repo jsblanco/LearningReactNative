@@ -95,7 +95,7 @@ const styles = StyleSheet.create({
         color: 'white',
         fontSize: 24,
         marginVertical: 20,
-
+        fontFamily: 'openSansBold'
     },
     inputRow: {
         width: 350,
