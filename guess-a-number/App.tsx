@@ -51,7 +51,7 @@ export default function App() {
     } else {
         return (
             <View style={styles.screen}>
-                <Header title="Uncle Jorge's Extraordinaire Number Guesser!"/>
+                <Header title="Uncle Jorge's Number Guessing Stravaganza!"/>
                 {content}
             </View>
         );

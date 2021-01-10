@@ -1,8 +1,9 @@
 import React from "react";
-import {View, StyleSheet, Button, Image} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
+import Button from "./components/Button";
+import Card from "./components/Card";
 import Text from './components/Text'
 import NumberContainer from "./components/NumberContainer";
-import Card from "./components/Card";
 import colors from "../constants/colors";
 import DefaultStyles from "../constants/default-styles";
 
@@ -33,7 +34,9 @@ const GameOverPage = (props: any) => {
                 </Text>
 
                 <View style={{width: "100%", marginTop: 20}}>
-                    <Button title={"Play again!"} onPress={props.restart}/>
+                    <Button onPress={props.restart}>
+                        Play again!
+                    </Button>
                 </View>
             </Card>
         </View>

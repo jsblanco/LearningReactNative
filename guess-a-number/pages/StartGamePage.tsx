@@ -1,5 +1,6 @@
 import React, {useState} from "react";
-import {StyleSheet, View, Button, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import {StyleSheet, View, TouchableWithoutFeedback, Keyboard, Alert} from 'react-native';
+import Button from "./components/Button";
 import Card from "./components/Card";
 import Input from "./components/Input";
 import Text from "./components/Text";
@@ -42,7 +43,7 @@ const StartGamePage = (props: { startGame: (e: number) => void }) => {
         <Card style={styles.confirmationCard}>
             <Text style={styles.confirmationCardTitle}>You selected:</Text>
             <NumberContainer>{selectedValue}</NumberContainer>
-            <Button title={"Start playing now!"} onPress={() => props.startGame(selectedValue)}/>
+            <Button onPress={() => props.startGame(selectedValue)}> Start playing now! </Button>
         </Card>)
 
     return (
@@ -63,16 +64,18 @@ const StartGamePage = (props: { startGame: (e: number) => void }) => {
                         <View style={{flex: 1, paddingRight: 5}}>
                             <Button
                                 onPress={resetEnteredValue}
-                                title="Reset"
-                                color={colors.secondary}
-                            />
+                                buttonStyle={{backgroundColor: colors.secondary}}
+                            >
+                                Reset
+                            </Button>
                         </View>
                         <View style={{flex: 1, paddingLeft: 5}}>
                             <Button
                                 onPress={confirmEnteredValue}
-                                title="Start game"
-                                color={colors.primary}
-                            />
+                                buttonStyle={{backgroundColor: colors.tertiary}}
+                            >
+                                Select
+                            </Button>
                         </View>
                     </View>
                 </Card>
