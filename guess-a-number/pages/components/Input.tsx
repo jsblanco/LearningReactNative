@@ -3,7 +3,11 @@ import {TextInput, StyleSheet, ViewStyle} from 'react-native';
 
 const Input = (props: any) => {
 
-    return <TextInput {...props} style={{...styles.input, ...props.style}}/>
+    return <TextInput
+        {...props}
+        disableFullscreenUI={true}
+        style={{...styles.input, ...props.style}}
+    />
 }
 
 export default Input;

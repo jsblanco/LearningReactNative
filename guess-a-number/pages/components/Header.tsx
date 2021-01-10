@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, View} from 'react-native';
+import {Dimensions, StyleSheet, Text, View} from 'react-native';
 
 import colors from '../../constants/colors'
 
@@ -18,8 +18,8 @@ export default Header;
 const styles = StyleSheet.create({
     header: {
         width: '100%',
-        height: 170,
-        paddingTop: 80,
+        height: Dimensions.get('window').height > 600 ? 180 : 50,
+        paddingTop: 60,
         paddingHorizontal: 20,
         paddingBottom: 30,
         backgroundColor: colors.primary,
@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
         color: '#355C7D',
         textAlign: "center",
         fontWeight: 'bold',
-        fontSize: 24,
+        fontSize: Dimensions.get('window').height > 600 ? 32: 20,
         fontFamily: 'openSansBold'
     }
 })

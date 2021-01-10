@@ -1,5 +1,5 @@
 import React from "react";
-import {StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
+import {Dimensions, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
 import colors from '../../constants/colors';
 
 const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewStyle, textStyle?: TextStyle, children: React.ReactNode }) => {
@@ -20,11 +20,11 @@ const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewSty
 const styles = StyleSheet.create({
     view: {
         backgroundColor: colors.primary,
-        paddingVertical: 10,
-        paddingHorizontal: 30,
+        paddingVertical: Dimensions.get('window').height > 600 ? 10 : 7,
         borderWidth: 0,
         borderRadius: 5,
         margin: 2,
+
     },
     text: {
         color: 'darkslategray',

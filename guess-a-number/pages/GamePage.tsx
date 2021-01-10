@@ -1,6 +1,8 @@
 import React, {useState, useRef, useEffect} from "react";
-import {View, StyleSheet, Alert, ScrollView, FlatList} from 'react-native';
+import {View, StyleSheet, Alert, ScrollView, FlatList, Dimensions} from 'react-native';
 import {Entypo} from '@expo/vector-icons';
+import * as ScreenOrientation from "expo-screen-orientation";
+
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Text from './components/Text'
@@ -25,12 +27,30 @@ const renderListItem = (listLength: number, itemObject: { index: number, item: s
 
 
 const GamePage = (props: any) => {
+
+    // ScreenOrientation.lockAsync(ScreenOrientation.OrientationLock.PORTRAIT);
+    // ScreenOrientation.addOrientationChangeListener()
+
     const initialGuess = generateRandomNumber(1, 100, +props.userNumber);
     const [currentGuess, setCurrentGuess] = useState(initialGuess)
     const [previousGuesses, setPreviousGuesses] = useState<string[]>([initialGuess.toString()]);
+    const [detectedDeviceHeight, setDetectedDeviceHeight] = useState(Dimensions.get('window').height)
+    const [detectedDeviceWidth, setDetectedDeviceWidth] = useState(Dimensions.get('window').width)
     const currentMin = useRef(1)
     const currentMax = useRef(99)
     const {userNumber, onGameEnd} = props;
+
+    useEffect(() => {
+        const updateLayout = () => {
+            setDetectedDeviceHeight(Dimensions.get('window').height)
+            setDetectedDeviceWidth(Dimensions.get('window').width)
+        }
+        Dimensions.addEventListener('change', updateLayout)
+
+        return () => {
+            Dimensions.removeEventListener('change', updateLayout)
+        }
+    })
 
     useEffect(() => {
         if (+currentGuess === +userNumber) {
@@ -53,6 +73,33 @@ const GamePage = (props: any) => {
         setPreviousGuesses(previousGuesses => [nextGuess.toString(), ...previousGuesses]);
     }
 
+    if (detectedDeviceHeight < 500) {
+        return (
+            <View style={styles.screen}>
+                <View style={{...styles.actionsRow, alignItems: "center"}}>
+                    <Button buttonStyle={{paddingHorizontal: 10}} onPress={() => isUserNumberHigherThanGuess(false)}>
+                        <Entypo name='arrow-down' size={24} color={'darkslategray'}/>
+                    </Button>
+                    <NumberContainer>{currentGuess}</NumberContainer>
+                    <Button buttonStyle={{paddingHorizontal: 10}} onPress={() => isUserNumberHigherThanGuess(true)}>
+                        <Entypo name='arrow-up' size={24} color={'darkslategray'}/>
+                    </Button>
+                </View>
+                <View>
+                    <Text style={styles.guessTitle}>
+                        Guess history:
+                    </Text>
+                </View>
+                <FlatList
+                    style={styles.pastGuesses}
+                    contentContainerStyle={styles.guessList}
+                    data={previousGuesses}
+                    keyExtractor={(item) => item}
+                    renderItem={renderListItem.bind(this, previousGuesses.length)}/>
+            </View>
+        )
+    }
+
     return (
         <View style={styles.screen}>
             <Text>Is this your number?</Text>
@@ -65,9 +112,9 @@ const GamePage = (props: any) => {
                             <Entypo name='arrow-down' size={24} color={'darkslategray'}/> Lower
                         </Button>
                     </View>
-                    <View style={{flex: 1, paddingLeft: 5}}>
+                    <View style={{flex: 1, paddingLeft: 5,}}>
                         <Button onPress={() => isUserNumberHigherThanGuess(true)}>
-                            <Entypo name='arrow-up' size={24} color={'darkslategray'}/> Higher
+                            Higher <Entypo name='arrow-up' size={24} color={'darkslategray'}/>
                         </Button>
                     </View>
                 </View>
@@ -81,7 +128,7 @@ const GamePage = (props: any) => {
             {/*    {previousGuesses.map((guess, index) => renderListItem((previousGuesses.length - index), guess))}*/}
             {/*</ScrollView>*/}
             <FlatList
-                style={{width: '60%'}}
+                style={styles.pastGuesses}
                 contentContainerStyle={styles.guessList}
                 data={previousGuesses}
                 keyExtractor={(item) => item}
@@ -105,6 +152,9 @@ const styles = StyleSheet.create({
         flexDirection: "row",
         justifyContent: 'space-evenly',
         marginTop: 10,
+    },
+    pastGuesses: {
+        width: Dimensions.get('window').width > 350 ? '60%' : '90%'
     },
     guessList: {
         flexGrow: 1,
@@ -132,7 +182,7 @@ const styles = StyleSheet.create({
         fontSize: 16,
         paddingBottom: 0,
         textAlign: 'center',
-    }
+    },
 
 })
 

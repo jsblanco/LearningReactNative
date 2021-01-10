@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, ViewStyle} from 'react-native';
+import {View, StyleSheet, ViewStyle, Dimensions} from 'react-native';
 import colors from "../../constants/colors";
 
 const Card = (props: { style?: ViewStyle, children: React.ReactNode }) => {
@@ -14,7 +14,7 @@ const Card = (props: { style?: ViewStyle, children: React.ReactNode }) => {
 const styles = StyleSheet.create({
     card: {
         borderRadius: 10,
-        padding: 20,
+        padding: Dimensions.get('window').height > 600 ? 20 : 15,
         shadowColor: 'black',
         shadowOffset: {
             width: 2,
