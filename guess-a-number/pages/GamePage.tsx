@@ -3,6 +3,7 @@ import {View, StyleSheet, Alert, ScrollView, FlatList, Dimensions} from 'react-n
 import {Entypo} from '@expo/vector-icons';
 import * as ScreenOrientation from "expo-screen-orientation";
 
+// @ts-ignore
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Text from './components/Text'

@@ -1,5 +1,6 @@
 import React from "react";
-import {View, StyleSheet, Image, Dimensions, ScrollView} from 'react-native';
+import {View, StyleSheet, Image, ScrollView, Dimensions} from 'react-native';
+// @ts-ignore
 import Button from "./components/Button";
 import Card from "./components/Card";
 import Text from './components/Text'
@@ -35,7 +36,7 @@ const GameOverPage = (props: any) => {
                     </Text>
                     <View style={{width: "100%", marginTop: 20, alignItems: "center"}}>
                         <Button buttonStyle={{width: Dimensions.get('window').width * 0.9, maxWidth: 200}}
-                                onPress={props.restart}>
+                                       onPress={props.restart}>
                             Play again!
                         </Button>
                     </View>

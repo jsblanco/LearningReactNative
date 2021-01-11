@@ -1,12 +1,19 @@
 import React from "react";
-import {Dimensions, StyleSheet, Text, TextStyle, TouchableOpacity, View, ViewStyle} from "react-native";
+import {
+    Dimensions,
+    StyleSheet,
+    Text,
+    TextStyle,
+    TouchableOpacity,
+    View,
+    ViewStyle,
+} from "react-native";
 import colors from '../../constants/colors';
 
 const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewStyle, textStyle?: TextStyle, children: React.ReactNode }) => {
 
     return (
-
-        <TouchableOpacity onPress={props.onPress}>
+        <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
             <View style={{...styles.view, ...props.buttonStyle}}>
                 <Text style={{...styles.text, ...props.textStyle}}>
                     {props.children}
@@ -19,10 +26,10 @@ const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewSty
 
 const styles = StyleSheet.create({
     view: {
-        backgroundColor: colors.primary,
+        backgroundColor: colors.secondary,
         paddingVertical: Dimensions.get('window').height > 600 ? 10 : 7,
         borderWidth: 0,
-        borderRadius: 5,
+        borderRadius: 25,
         margin: 2,
 
     },

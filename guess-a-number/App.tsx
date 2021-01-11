@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {StyleSheet, Text, View} from 'react-native';
-import { useFonts } from 'expo-font';
+import {StyleSheet, SafeAreaView, View} from 'react-native';
+import {useFonts} from 'expo-font';
 import AppLoading from 'expo-app-loading';
 
 import Header from './pages/components/Header'
@@ -50,13 +50,13 @@ export default function App() {
         return <AppLoading/>;
     } else {
         return (
-            <View style={styles.screen}>
-                <Header title="Uncle Jorge's Number Guessing Stravaganza!"/>
-                {content}
-            </View>
+            <SafeAreaView style={styles.screen}>
+                    <Header title="Uncle Jorge's Number Guessing Stravaganza!"/>
+                    {content}
+            </SafeAreaView>
         );
-}
     }
+}
 
 const styles = StyleSheet.create({
     screen: {

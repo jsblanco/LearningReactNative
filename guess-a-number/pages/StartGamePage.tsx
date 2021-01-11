@@ -9,7 +9,8 @@ import {
     ScrollView,
     KeyboardAvoidingView,
 } from 'react-native';
-import Button from "./components/Button";
+// @ts-ignore
+import Button from './components/Button';
 import Card from "./components/Card";
 import Input from "./components/Input";
 import Text from "./components/Text";
@@ -63,7 +64,7 @@ const StartGamePage = (props: { startGame: (e: number) => void }) => {
             <Text style={styles.confirmationCardTitle}>You selected:</Text>
             <NumberContainer>{selectedValue}</NumberContainer>
             <Button buttonStyle={{...styles.button, width: buttonWidth}}
-                    onPress={() => props.startGame(selectedValue)}> Start playing now! </Button>
+                           onPress={() => props.startGame(selectedValue)}> Start playing now! </Button>
         </Card>)
 
     return (
