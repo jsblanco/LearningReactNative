@@ -1,5 +1,6 @@
 import React from "react";
 import {Text as ReactText, StyleSheet, TextStyle} from 'react-native';
+import colours from "../../../constants/colours";
 
 const Text = (props: { style?: TextStyle, children: React.ReactNode  }) => {
 
@@ -13,6 +14,7 @@ export default Text;
 const styles = StyleSheet.create({
     text: {
         paddingBottom: 5,
-        fontFamily: 'openSans'
+        fontFamily: 'openSans',
+        color: colours.text.regular
     },
 })

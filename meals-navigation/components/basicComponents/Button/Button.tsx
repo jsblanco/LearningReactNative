@@ -26,15 +26,16 @@ const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewSty
 
 const styles = StyleSheet.create({
     view: {
-        backgroundColor: colours.secondary,
+        backgroundColor: colours.accent,
         paddingVertical: Dimensions.get('window').height > 600 ? 10 : 7,
+        paddingHorizontal: 15,
         borderWidth: 0,
         borderRadius: 25,
         margin: 2,
 
     },
     text: {
-        color: 'darkslategray',
+        color: colours.text.regular,
         fontFamily: 'openSans',
         textTransform: 'uppercase',
         fontWeight: 'bold',

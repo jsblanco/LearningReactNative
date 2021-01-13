@@ -1,13 +1,21 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import styles from './Categories.styles';
+import {FlatList} from 'react-native';
+import {StackScreenProps} from '@react-navigation/stack';
+import {StackParamList} from '../../navigation/types'
+import dummyCategories from '../../data/dummyData';
+import Category from "../../models/Category";
+import CategoryGridItem from "../../components/CategoryGridItem/CategoryGridItem";
 
-const CategoriesScreen = (props: any) => {
+type Props = StackScreenProps<StackParamList, 'Categories'>;
+
+
+const CategoriesScreen = ({route, navigation}: Props) => {
+
+    const renderGridItem = ({item}: { item: Category }) => <CategoryGridItem category={item}/>;
 
     return (
-        <View style={styles.screen}>
-            <Text>Categories</Text>
-        </View>
+        <FlatList keyExtractor={(item: Category) => item.getId()} numColumns={2} data={dummyCategories}
+                  renderItem={renderGridItem}/>
     )
 }
 
