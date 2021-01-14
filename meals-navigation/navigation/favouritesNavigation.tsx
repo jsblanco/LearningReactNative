@@ -14,7 +14,7 @@ export default function FavouritesNavigation() {
         <Stack.Navigator
             initialRouteName={'FavouritesList'}
             screenOptions={{
-                headerTintColor: colours.brightAccent, // 'white',
+                headerTintColor: Platform.OS === 'android' ? colours.background : colours.brightAccent, // 'white',
                 ...headerStyles,
             }}>
             <Stack.Screen

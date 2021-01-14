@@ -17,7 +17,7 @@ export default function HomeNavigation() {
         <Stack.Navigator
             initialRouteName="Categories"
             screenOptions={{
-                headerTintColor: colours.primary, // 'white',
+                headerTintColor: Platform.OS === 'android' ? colours.background : colours.brightAccent, // 'white',
                 ...headerStyles,
             }}
         >

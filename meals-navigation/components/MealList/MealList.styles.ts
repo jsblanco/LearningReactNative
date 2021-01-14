@@ -5,6 +5,12 @@ export default StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
-        paddingHorizontal: 10,
+        width: '100%',
+    },
+    flatList: {
+        width: '100%',
+        flex: 1,
+        paddingVertical: 10,
+        paddingHorizontal: 15,
     },
 })

@@ -25,11 +25,11 @@ const MealDetailsScreen = ({route, navigation}: Props) => {
                         iconName={'ios-star-outline'}
                         onPress={() => console.log('Favourite!')}
                     />
-                    <Item
-                        title={'User'}
-                        iconName={'person-outline'}
-                        onPress={() => console.log('Users!')}
-                    />
+                    {/*<Item*/}
+                    {/*    title={'User'}*/}
+                    {/*    iconName={'person-outline'}*/}
+                    {/*    onPress={() => console.log('Users!')}*/}
+                    {/*/>*/}
                 </HeaderButtons>
             )
         });

@@ -5,18 +5,15 @@ import {Platform} from 'react-native';
 import colours from '../../constants/colours';
 
 
-const HeaderButton = (props: any) => {
+export default function HeaderButton(props: any) {
 
     return (
         <HButton
             {...props}
             IconComponent={Ionicons}
-            iconSize={23}
-            color={colours.primary}
-            // color = {Platform.OS === 'android ? 'white : colours.primary}
+            iconSize={21}
+            color={Platform.OS === 'android' ? 'white' : colours.primary}
+            // color={colours.primary}
         />
     )
-
 }
-
-export default HeaderButton;
