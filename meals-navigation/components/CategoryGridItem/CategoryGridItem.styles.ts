@@ -5,8 +5,6 @@ export default StyleSheet.create({
         flex: 1,
         margin: 10,
         height: 150,
-        alignItems: "center",
-        justifyContent: "center",
         backgroundColor: 'white',
         borderRadius: 10,
         shadowColor: "#000",
@@ -17,14 +15,20 @@ export default StyleSheet.create({
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
         elevation: 5,
+        overflow: "hidden",
     },
     container: {
         flex:1,
+        width: '100%',
+        paddingVertical: 10,
+        paddingHorizontal: 15,
         borderRadius: 10,
-        overflow: "hidden",
+        alignItems: "flex-end",
+        justifyContent: "flex-end",
     },
     title: {
-        textAlign: "center",
-        fontFamily: "openSansBold"
+        fontFamily: "openSansBold",
+        textAlign: "right",
+        fontSize: 18,
     }
 })

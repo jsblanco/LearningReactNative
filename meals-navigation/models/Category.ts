@@ -1,9 +1,9 @@
 
 
 export default class Category {
-    readonly _id: string;
-    readonly _title: string;
-    readonly _colour: string;
+    private readonly _id: string;
+    private readonly _title: string;
+    private readonly _colour: string;
 
     constructor(id: string, title: string, colour: string ) {
         this._id = id;
@@ -11,16 +11,15 @@ export default class Category {
         this._colour = colour;
     }
 
-
-    getId(): string {
+    get id(): string {
         return this._id;
     }
 
-    getTitle(): string {
+    get title(): string {
         return this._title;
     }
 
-    getColour(): string {
+    get colour(): string {
         return this._colour;
     }
 }

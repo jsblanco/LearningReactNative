@@ -36,7 +36,8 @@ export default function App() {
                 initialRouteName="Categories"
                 screenOptions={{
                     headerTitle: 'React Native Meals',
-                    ...headerStyles
+                    headerTintColor: 'white',
+                    ...headerStyles,
                 }}
             >
                 <Stack.Screen

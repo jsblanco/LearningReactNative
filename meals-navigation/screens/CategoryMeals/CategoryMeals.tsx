@@ -1,33 +1,41 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, Text, FlatList} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {StackParamList} from '../../navigation/types'
 import styles from './CategoryMeals.styles';
 import Button from "../../components/basicComponents/Button/Button";
-import dummyCategories from '../../data/dummyData';
-import CategoriesScreen from "../Categories/Categories";
-import Category from "../../models/Category";
+import {CATEGORIES, MEALS} from '../../data/dummyData';
+import Meal from "../../models/Meal";
+import MealListItem from "../../components/MealListItem/MealListItem";
+
 
 type Props = StackScreenProps<StackParamList, 'Meals'>;
 
 
 const CategoryMealsScreen = ({route, navigation}: Props) => {
+    const categoryId = route.params.categoryId;
+    const categoryMeals = MEALS.filter(meal => meal.categoryId.indexOf(categoryId) >= 0);
+    const renderMealListItem = ({item}: { item: Meal }) => {
+        return <MealListItem meal={item} onSelect={() => navigation.navigate('MealDetails', {mealId: item.id})}/>
+    }
 
-
-    const category = dummyCategories.find(category => category.getId() === route.params.categoryId)
+    const category = CATEGORIES.find(category => category.id === categoryId)
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
-            title: !!category ? category.getTitle() : 'Missing category',
+            title: !!category ? category.title : 'Missing category',
         });
     }, [navigation, category]);
 
 
     return (
         <View style={styles.screen}>
-            <Text>{!!category ? category.getTitle() : 'There is no such category'}</Text>
-            <Button onPress={() => navigation.push('MealDetails')}>Go to meal details!</Button>
-            <Button onPress={() => navigation.goBack()}>Go back!</Button>
+            <FlatList
+                data={categoryMeals}
+                keyExtractor={(meal: Meal) => meal.id}
+                renderItem={renderMealListItem}
+                style={{width: '100%'}}
+            />
         </View>
     )
 }
