@@ -5,3 +5,8 @@ export type StackParamList = {
     Meals: { categoryId: string };
     MealDetails: { mealId: string };
 };
+
+export type FavouritesStackParamList = {
+    FavouritesList: undefined;
+    MealDetails: { mealId: string };
+};

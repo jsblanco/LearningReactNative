@@ -1,19 +1,26 @@
 import React, {useState} from 'react';
-import {StyleSheet, Platform} from 'react-native';
-import {createStackNavigator} from '@react-navigation/stack';
+import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import AppLoading from 'expo-app-loading';
 import * as Font from 'expo-font'
-import {StackParamList} from "./navigation/types";
 import {enableScreens} from "react-native-screens"
+import {Ionicons} from "@expo/vector-icons";
 
-import CategoriesScreen from "./screens/Categories/Categories";
-import CategoryMealsScreen from "./screens/CategoryMeals/CategoryMeals";
-import MealDetailsScreen from "./screens/MealDetails/MealDetails";
 import colours from "./constants/colours";
+import HomeNavigation from "./navigation/homeNavigation";
+import FavouritesScreen from "./screens/Favourites/Favourites";
+import {Platform} from "react-native";
+import {createMaterialBottomTabNavigator} from "@react-navigation/material-bottom-tabs";
+import {LogBox} from "react-native";
+import FavouritesNavigation from "./navigation/favouritesNavigation";
+
+LogBox.ignoreLogs([
+    "Your project is accessing the following APIs from a deprecated global rather than a module import: Constants (expo- constants).",
+]);
 
 enableScreens();
-const Stack = createStackNavigator<StackParamList>();
+const Tab = Platform.OS === 'android' ? createMaterialBottomTabNavigator() : createBottomTabNavigator();
+// const Tab = createBottomTabNavigator();
 const fetchFonts = () => Font.loadAsync({
     'openSans': require('./assets/fonts/OpenSans-Regular.ttf'),
     'openSansBold': require('./assets/fonts/OpenSans-Bold.ttf')
@@ -30,65 +37,57 @@ export default function App() {
         />
     }
 
+
     return (
         <NavigationContainer>
-            <Stack.Navigator
-                initialRouteName="Categories"
-                screenOptions={{
-                    headerTitle: 'React Native Meals',
-                    headerTintColor: 'white',
-                    ...headerStyles,
+            <Tab.Navigator
+                tabBarOptions={{
+                    ...tabBarOptions,
                 }}
+                shifting={true}
             >
-                <Stack.Screen
+                <Tab.Screen
                     name="Categories"
-                    component={CategoriesScreen}
+                    component={HomeNavigation}
                     options={{
-                        headerTitle: 'Meal categories'
+                        tabBarLabel: "All Meals",
+                        tabBarIcon: ({color}) => (
+                            <Ionicons name="ios-restaurant" color={color} size={16}/>
+                        ),
+                        tabBarColor: colours.primary
                     }}
                 />
-                <Stack.Screen
-                    name="Meals"
-                    component={CategoryMealsScreen}
+                <Tab.Screen
+                    name="Favourites"
+                    component={FavouritesNavigation}
                     options={{
-                        title: 'Category meals',
+                        tabBarLabel: "My Favourites",
+                        tabBarIcon: ({color}) => (
+                            <Ionicons name="ios-star" color={color} size={16}/>
+                        ),
+                        tabBarColor: colours.brightAccent
                     }}
-                    // initialParams={{}}
-                    // options={({route}) => ({
-                    //     title: route.params.categoryId,
-                    //     ...headerStyles})}
+
                 />
-                <Stack.Screen
-                    name="MealDetails"
-                    component={MealDetailsScreen}
-                    options={{
-                        headerTitle: 'Meal details',
-                    }}
-                />
-            </Stack.Navigator>
+            </Tab.Navigator>
         </NavigationContainer>
-    );
+    )
+        ;
 }
 
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
 
-const headerStyles = StyleSheet.create({
-    headerStyle: {
-        backgroundColor: Platform.OS === 'android' ? colours.primary : colours.background,
+const tabBarOptions = {
+    activeTintColor: colours.brightAccent,
+    // activeBackgroundColor: '#eee',
+    style: {
+        height: 75,
+        paddingTop: 10
     },
-    headerTitleStyle: {
-        color: Platform.OS !== 'android' ? colours.primary : colours.background,
-        fontWeight: '900',
-        fontFamily: 'openSansBold',
-        // textTransform: 'uppercase'
-        // textAlign: 'center',
+    labelStyle: {
+        fontFamily: 'openSans',
+        fontSize: 14,
+        paddingBottom: 10
     }
-})
+}
+
 
