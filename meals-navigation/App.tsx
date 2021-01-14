@@ -8,7 +8,7 @@ import {StackParamList} from "./navigation/types";
 import {enableScreens} from "react-native-screens"
 
 import CategoriesScreen from "./screens/Categories/Categories";
-import CategoryMeals from "./screens/CategoryMeals/CategoryMeals";
+import CategoryMealsScreen from "./screens/CategoryMeals/CategoryMeals";
 import MealDetailsScreen from "./screens/MealDetails/MealDetails";
 import colours from "./constants/colours";
 
@@ -49,7 +49,7 @@ export default function App() {
                 />
                 <Stack.Screen
                     name="Meals"
-                    component={CategoryMeals}
+                    component={CategoryMealsScreen}
                     options={{
                         title: 'Category meals',
                     }}
