@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useCallback} from 'react';
 import {View} from 'react-native';
 import {DrawerActions} from "@react-navigation/native";
-import {DrawerParamsList} from "../../navigation/types";
-import {DrawerScreenProps} from "@react-navigation/drawer";
+import {FiltersStackParamList} from "../../navigation/types";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import HeaderButton from "../../components/HeaderButton/HeaderButton";
 import Text from "../../components/basicComponents/Text/Text";
@@ -12,8 +11,9 @@ import colours from "../../constants/colours";
 import {Ionicons} from "@expo/vector-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faBreadSlice, faCheese, faLeaf, faSeedling} from '@fortawesome/free-solid-svg-icons'
+import {StackScreenProps} from "@react-navigation/stack";
 
-type Props = DrawerScreenProps<DrawerParamsList, 'Filters'>;
+type Props = StackScreenProps<FiltersStackParamList, 'FiltersScreen'>;
 
 const MealFiltersScreen = ({route, navigation}: Props) => {
     React.useLayoutEffect(() => {
@@ -26,6 +26,15 @@ const MealFiltersScreen = ({route, navigation}: Props) => {
                         onPress={() => navigation.dispatch(DrawerActions.toggleDrawer)}
                     />
                 </HeaderButtons>
+            ),
+            headerRight: () => (
+                <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                    <Item
+                        title={'Menu'}
+                        iconName={'ios-funnel'}
+                        onPress={route.params.save}
+                    />
+                </HeaderButtons>
             )
         });
     }, [navigation]);
@@ -34,6 +43,21 @@ const MealFiltersScreen = ({route, navigation}: Props) => {
     const [isLactoseFree, setIsLactoseFree] = useState(false)
     const [isVegetarian, setIsVegetarian] = useState(false)
     const [isVegan, setIsVegan] = useState(false)
+
+    const saveFilters = useCallback(() => {
+        const appliedFilters = {
+            glutenFree: isGlutenFree,
+            lactoseFree: isLactoseFree,
+            vegetarian: isVegetarian,
+            vegan: isVegan
+        }
+        console.log(appliedFilters)
+    }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan])
+
+    useEffect(() => {
+            navigation.setParams({save: saveFilters})
+        }, [saveFilters]
+    )
 
     return (
         <View style={styles.screen}>

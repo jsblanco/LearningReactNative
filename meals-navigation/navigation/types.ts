@@ -17,5 +17,7 @@ export type FavouritesStackParamList = {
 };
 
 export type FiltersStackParamList = {
-    FiltersScreen: undefined;
+    FiltersScreen: {
+        save: ()=>void
+    };
 };
