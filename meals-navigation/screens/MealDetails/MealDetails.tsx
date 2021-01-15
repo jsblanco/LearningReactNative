@@ -1,17 +1,20 @@
 import React from 'react';
-import {View, Text} from 'react-native';
+import {View, ScrollView, Image} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {StackParamList} from '../../navigation/types'
-import { MEALS} from '../../data/dummyData'
-import styles from './MealDetails.styles';
-import Button from "../../components/basicComponents/Button/Button";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
-import HeaderButton from "../../components/HeaderButton/HeaderButton";
+import {MealsStackParamList} from '../../navigation/types'
+import {MEALS} from '../../data/dummyData'
+import styles from './MealDetails.styles';
 
-type Props = StackScreenProps<StackParamList, 'MealDetails'>;
+import Text from "../../components/basicComponents/Text/Text";
+import Button from "../../components/basicComponents/Button/Button";
+import HeaderButton from "../../components/HeaderButton/HeaderButton";
+import * as url from "url";
+import ListItem from "../../components/ListItem/ListItem";
+
+type Props = StackScreenProps<MealsStackParamList, 'MealDetails'>;
 
 const MealDetailsScreen = ({route, navigation}: Props) => {
-
 
     const meal = MEALS.find(meal => meal.id === route.params.mealId);
 
@@ -25,11 +28,6 @@ const MealDetailsScreen = ({route, navigation}: Props) => {
                         iconName={'ios-star-outline'}
                         onPress={() => console.log('Favourite!')}
                     />
-                    {/*<Item*/}
-                    {/*    title={'User'}*/}
-                    {/*    iconName={'person-outline'}*/}
-                    {/*    onPress={() => console.log('Users!')}*/}
-                    {/*/>*/}
                 </HeaderButtons>
             )
         });
@@ -38,10 +36,20 @@ const MealDetailsScreen = ({route, navigation}: Props) => {
     if (!meal) return <View style={styles.screen}><Text>Loading meal...</Text></View>;
 
     return (
-        <View style={styles.screen}>
-            <Text>{meal.title}</Text>
-            <Button onPress={() => navigation.popToTop()}> Return home </Button>
-        </View>
+        <ScrollView style={{flex: 1, height: '100%'}}>
+            <Image style={{...styles.image}} source={{uri: meal.imageUrl}}/>
+            <View style={styles.quickDetails}>
+                <Text style={styles.detailsEntry}>{meal.duration} minutes</Text>
+                <Text style={styles.detailsEntry}>{meal.complexity}</Text>
+                <Text style={styles.detailsEntry}>{meal.affordability}</Text>
+            </View>
+            <Text style={styles.title}>Ingredients:</Text>
+            {meal.ingredients.map((ingredient, index) =>
+                <ListItem itemKey={index} value={ingredient}/>)}
+            <Text style={styles.title}>Cooking steps:</Text>
+            {meal.steps.map((step, index) =>
+                <ListItem itemKey={index} value={index+1+'. '+step}/>)}
+        </ScrollView>
     )
 }
 

@@ -1,13 +1,13 @@
 import React from 'react';
 import {View} from 'react-native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {StackParamList} from '../../navigation/types'
+import {MealsStackParamList} from '../../navigation/types'
 import styles from './CategoryMeals.styles';
 import {CATEGORIES, MEALS} from '../../data/dummyData';
 import MealList from "../../components/MealList/MealList";
 
 
-type Props = StackScreenProps<StackParamList, 'Meals'>;
+type Props = StackScreenProps<MealsStackParamList, 'Meals'>;
 
 
 const CategoryMealsScreen = ({route: {params: {categoryId}}, navigation}: Props) => {

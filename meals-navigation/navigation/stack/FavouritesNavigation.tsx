@@ -1,11 +1,11 @@
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {FavouritesStackParamList} from "./types";
+import {FavouritesStackParamList} from "../types";
 
-import colours from "../constants/colours";
-import FavouritesScreen from "../screens/Favourites/Favourites";
-import MealDetailsScreen from "../screens/MealDetails/MealDetails";
+import colours from "../../constants/colours";
+import FavouritesScreen from "../../screens/Favourites/Favourites";
+import MealDetailsScreen from "../../screens/MealDetails/MealDetails";
 
 const Stack = createStackNavigator<FavouritesStackParamList>();
 
@@ -47,6 +47,9 @@ const headerStyles = StyleSheet.create({
         fontWeight: '900',
         fontFamily: 'openSansBold',
         // textTransform: 'uppercase'
-        textAlign: 'center',
+        // textAlign: 'center',
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'openSans'
     }
 })

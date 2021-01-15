@@ -1,17 +1,17 @@
 import React from 'react';
 import {Platform, StyleSheet} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
-import {StackParamList} from "./types";
+import {MealsStackParamList} from "../types";
 
-import CategoriesScreen from "../screens/Categories/Categories";
-import CategoryMealsScreen from "../screens/CategoryMeals/CategoryMeals";
-import MealDetailsScreen from "../screens/MealDetails/MealDetails";
-import Text from "../components/basicComponents/Text/Text";
-import colours from "../constants/colours";
+import CategoriesScreen from "../../screens/Categories/Categories";
+import CategoryMealsScreen from "../../screens/CategoryMeals/CategoryMeals";
+import MealDetailsScreen from "../../screens/MealDetails/MealDetails";
+import Text from "../../components/basicComponents/Text/Text";
+import colours from "../../constants/colours";
 
-const Stack = createStackNavigator<StackParamList>();
+const Stack = createStackNavigator<MealsStackParamList>();
 
-export default function HomeNavigation() {
+export default function MealsNavigation() {
 
     return (
         <Stack.Navigator
@@ -57,16 +57,6 @@ export default function HomeNavigation() {
         ;
 }
 
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-});
-
 const headerStyles = StyleSheet.create({
     headerStyle: {
         backgroundColor: /* '#fff', //*/Platform.OS === 'android' ? colours.primary : colours.background,
@@ -78,7 +68,10 @@ const headerStyles = StyleSheet.create({
         fontWeight: '900',
         fontFamily: 'openSansBold',
         // textTransform: 'uppercase'
-        textAlign: 'center',
+        // textAlign: 'center',
+    },
+    headerBackTitleStyle: {
+        fontFamily: 'openSans'
     }
 })
 

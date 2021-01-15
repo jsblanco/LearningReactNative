@@ -1,20 +1,35 @@
 import React from 'react';
-import {View, Text} from 'react-native';
-import styles from './Favourites.styles';
-import MealList from "../../components/MealList/MealList";
+import {DrawerActions} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
-import {FavouritesStackParamList, StackParamList} from '../../navigation/types'
+import {HeaderButtons, Item} from "react-navigation-header-buttons";
+import {FavouritesStackParamList} from '../../navigation/types'
 import {MEALS} from '../../data/dummyData';
+import HeaderButton from "../../components/HeaderButton/HeaderButton";
+import MealList from "../../components/MealList/MealList";
 
 type Props = StackScreenProps<FavouritesStackParamList, 'FavouritesList'>;
 
 const FavouritesScreen = ({route, navigation}: Props) => {
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerLeft: () => (
+                <HeaderButtons HeaderButtonComponent={HeaderButton}>
+                    <Item
+                        title={'Menu'}
+                        iconName={'ios-menu'}
+                        onPress={() => navigation.dispatch(DrawerActions.toggleDrawer)}
+                    />
+                </HeaderButtons>
+            )
+        });
+    }, [navigation]);
+
     const navigateToMeal = (mealId: string) => navigation.navigate('MealDetails', {mealId: mealId})
-    const favouriteMeals = MEALS.filter(meal=> +meal.id.slice(1)%2===0)
+    const favouriteMeals = MEALS.filter(meal => +meal.id.slice(1) % 2 === 0)
 
     return (
-            <MealList meals={favouriteMeals} onSelect={navigateToMeal}/>
+        <MealList meals={favouriteMeals} onSelect={navigateToMeal}/>
 
     )
 }

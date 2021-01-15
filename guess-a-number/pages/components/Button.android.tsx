@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
     },
     view: {
         backgroundColor: colors.primary,
-        paddingVertical: Dimensions.get('window').height > 600 ? 10 : 7,
+        paddingVertical:  > 600 ? 10 : 7,
         borderWidth: 0,
         borderRadius: 25,
         margin: 2,

@@ -1,9 +1,9 @@
 import React from "react";
 import {
-    Dimensions,
+    Dimensions, Platform,
     StyleSheet,
     Text,
-    TextStyle,
+    TextStyle, TouchableNativeFeedback,
     TouchableOpacity,
     View,
     ViewStyle,
@@ -12,14 +12,20 @@ import colours from '../../../constants/colours';
 
 const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewStyle, textStyle?: TextStyle, children: React.ReactNode }) => {
 
+
+    let ButtonType: any = TouchableOpacity;
+    if (Platform.OS === 'android' && Platform.Version >= 21) {
+        ButtonType = TouchableNativeFeedback;
+    }
+
     return (
-        <TouchableOpacity activeOpacity={0.6} onPress={props.onPress}>
+        <ButtonType activeOpacity={0.6} onPress={props.onPress}>
             <View style={{...styles.view, ...props.buttonStyle}}>
                 <Text style={{...styles.text, ...props.textStyle}}>
                     {props.children}
                 </Text>
             </View>
-        </TouchableOpacity>
+        </ButtonType>
     )
 
 }
