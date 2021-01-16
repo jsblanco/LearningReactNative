@@ -12,10 +12,30 @@ import {Ionicons} from "@expo/vector-icons";
 import {FontAwesomeIcon} from '@fortawesome/react-native-fontawesome'
 import {faBreadSlice, faCheese, faLeaf, faSeedling} from '@fortawesome/free-solid-svg-icons'
 import {StackScreenProps} from "@react-navigation/stack";
+import {useDispatch} from "react-redux";
+import * as actions from '../../store/actions/mealsActions';
 
 type Props = StackScreenProps<FiltersStackParamList, 'FiltersScreen'>;
 
 const MealFiltersScreen = ({route, navigation}: Props) => {
+    const [isGlutenFree, setIsGlutenFree] = useState(false)
+    const [isLactoseFree, setIsLactoseFree] = useState(false)
+    const [isVegetarian, setIsVegetarian] = useState(false)
+    const [isVegan, setIsVegan] = useState(false)
+
+    const dispatch = useDispatch();
+
+    const saveFilters = useCallback(() => {
+        const appliedFilters = {
+            glutenFree: isGlutenFree,
+            lactoseFree: isLactoseFree,
+            vegetarian: isVegetarian,
+            vegan: isVegan
+        }
+        dispatch(actions.setFilters(appliedFilters))
+        navigation.navigate('Categories',  {screen: 'Categories'})
+    }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan])
+
     React.useLayoutEffect(() => {
         navigation.setOptions({
             headerLeft: () => (
@@ -32,32 +52,12 @@ const MealFiltersScreen = ({route, navigation}: Props) => {
                     <Item
                         title={'Menu'}
                         iconName={'ios-funnel'}
-                        onPress={route.params.save}
+                        onPress={saveFilters}
                     />
                 </HeaderButtons>
             )
         });
-    }, [navigation]);
-
-    const [isGlutenFree, setIsGlutenFree] = useState(false)
-    const [isLactoseFree, setIsLactoseFree] = useState(false)
-    const [isVegetarian, setIsVegetarian] = useState(false)
-    const [isVegan, setIsVegan] = useState(false)
-
-    const saveFilters = useCallback(() => {
-        const appliedFilters = {
-            glutenFree: isGlutenFree,
-            lactoseFree: isLactoseFree,
-            vegetarian: isVegetarian,
-            vegan: isVegan
-        }
-        console.log(appliedFilters)
-    }, [isGlutenFree, isLactoseFree, isVegetarian, isVegan])
-
-    useEffect(() => {
-            navigation.setParams({save: saveFilters})
-        }, [saveFilters]
-    )
+    }, [navigation, saveFilters]);
 
     return (
         <View style={styles.screen}>

@@ -10,7 +10,7 @@ import {
 } from "react-native";
 import colours from '../../../constants/colours';
 
-const Button = (props: { onPress: (...args: any[]) => any, buttonStyle?: ViewStyle, textStyle?: TextStyle, children: React.ReactNode }) => {
+const Button = (props: { onPress: (...args: any[] ) => any | void, buttonStyle?: ViewStyle, textStyle?: TextStyle, children: React.ReactNode }) => {
 
 
     let ButtonType: any = TouchableOpacity;

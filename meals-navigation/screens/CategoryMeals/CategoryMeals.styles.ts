@@ -6,4 +6,8 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    emptyListWarning: {
+        fontFamily: 'openSansBold',
+        fontSize: 16,
+    }
 })

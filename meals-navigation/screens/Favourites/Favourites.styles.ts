@@ -7,4 +7,8 @@ export default StyleSheet.create({
         alignItems: 'center',
         paddingHorizontal: 10,
     },
+    emptyListWarning: {
+        fontFamily: 'openSansBold',
+        fontSize: 16,
+    }
 })

@@ -7,7 +7,6 @@ import {MealsStackParamList} from '../../navigation/types'
 import {CATEGORIES} from '../../data/dummyData';
 import Category from "../../models/Category";
 
-
 import CategoryGridItem from "../../components/CategoryGridItem/CategoryGridItem";
 import HeaderButton from "../../components/HeaderButton/HeaderButton";
 
