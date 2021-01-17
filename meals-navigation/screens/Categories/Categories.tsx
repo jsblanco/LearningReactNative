@@ -1,11 +1,12 @@
 import React from 'react';
 import {FlatList} from 'react-native';
+import {useSelector} from "react-redux";
 import {DrawerActions} from '@react-navigation/native';
 import {StackScreenProps} from '@react-navigation/stack';
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import {MealsStackParamList} from '../../navigation/types'
-import {CATEGORIES} from '../../data/dummyData';
 import Category from "../../models/Category";
+import {RootState} from "../../App";
 
 import CategoryGridItem from "../../components/CategoryGridItem/CategoryGridItem";
 import HeaderButton from "../../components/HeaderButton/HeaderButton";
@@ -13,6 +14,7 @@ import HeaderButton from "../../components/HeaderButton/HeaderButton";
 type Props = StackScreenProps<MealsStackParamList, 'Categories'>;
 
 const CategoriesScreen = ({route, navigation}: Props) => {
+    const categories = useSelector((state: RootState) => state.meals.categories)
 
     React.useLayoutEffect(() => {
         navigation.setOptions({
@@ -38,7 +40,7 @@ const CategoriesScreen = ({route, navigation}: Props) => {
     };
 
     return (
-        <FlatList keyExtractor={(item: Category) => item.id} numColumns={2} data={CATEGORIES}
+        <FlatList keyExtractor={(item: Category) => item.id} numColumns={2} data={categories}
                   renderItem={renderGridItem}/>
     )
 }
