@@ -11,7 +11,7 @@ export default function HeaderButton(props: any) {
         <HButton
             {...props}
             IconComponent={Ionicons}
-            iconSize={21}
+            iconSize={23}
             color={Platform.OS === 'android' ? colours.background : colours.primary}
         />
     )

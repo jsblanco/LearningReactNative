@@ -36,6 +36,7 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
         overflow: "hidden",
+        margin: 2,
         backgroundColor: colours.background,
     },
     view: {
@@ -44,7 +45,6 @@ const styles = StyleSheet.create({
         paddingHorizontal: 15,
         borderRadius: 5,
         borderWidth: 0,
-        margin: 2,
     },
     text: {
         color: 'white',
