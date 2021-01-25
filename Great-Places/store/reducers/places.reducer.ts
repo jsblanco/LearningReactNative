@@ -1,17 +1,18 @@
 import * as constants from '../constants/places.constants'
 
 type StateType = {
-    key: any,
+    places: [],
 }
 
 const initialState: StateType = {
-    key: undefined
+    places: []
 }
 
 const placesReducer = (state: StateType = initialState, {type, payload}: { type: string, payload: any }) => {
+    console.log(payload)
     switch (type) {
-        case constants.CONSTANT_NAME_SUCCESS:
-            return {...state}
+        case constants.ADD_PLACE_SUCCESS:
+            return {...state, places: [payload, ...state.places]}
         default:
             return {...state};
     }

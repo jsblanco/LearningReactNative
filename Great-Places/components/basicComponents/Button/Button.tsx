@@ -36,7 +36,8 @@ const styles = StyleSheet.create({
     container: {
         borderRadius: 5,
         overflow: "hidden",
-        margin: 2,
+        marginVertical: 5,
+        marginHorizontal: 10,
         backgroundColor: colours.background,
     },
     view: {

@@ -1,18 +1,20 @@
 import {takeLatest, put} from "redux-saga/effects";
 import * as constants from "../constants/places.constants";
-import {action} from "../actions/places.actions";
+import {addNewPlace} from "../actions/places.actions";
 
-function* placesEffect(payload: any) {
+function* placesEffect({payload}: { type: string, payload: any }) {
     try {
-        yield put(action.success(payload));
+        console.log('saga')
+        // Adapt payload to a new Place()
+        yield put(addNewPlace.success(payload));
     } catch (e) {
         console.error(e);
-        yield put(action.failure(e));
+        yield put(addNewPlace.failure(e));
     }
 }
 
 function* placesSagas() {
-    yield takeLatest(constants.CONSTANT_NAME_REQUEST, placesEffect);
+    yield takeLatest(constants.ADD_PLACE_REQUEST, placesEffect);
 }
 
 export default placesSagas;

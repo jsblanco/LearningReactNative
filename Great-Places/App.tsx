@@ -5,6 +5,8 @@ import {RootStackNavigation} from "./navigation/RootStackNavigation";
 import {enableScreens} from "react-native-screens"
 import AppLoading from 'expo-app-loading';
 import * as Font from "expo-font";
+import {Provider} from "react-redux";
+import {store} from "./store/store";
 
 enableScreens();
 
@@ -25,7 +27,9 @@ export default function App() {
     }
 
     return (
-        <RootStackNavigation/>
+        <Provider store={store}>
+            <RootStackNavigation/>
+        </Provider>
     );
 }
 

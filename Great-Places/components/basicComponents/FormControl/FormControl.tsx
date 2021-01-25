@@ -4,16 +4,17 @@ import styles from './FormControl.styles';
 import Text from "../Text/Text";
 import {FormControlType} from "./FormControlTypes";
 
-
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const LOST_FOCUS = 'LOST_FOCUS';
 const inputReducer = (state: any, {type, value, isValid}: { type: string, value?: string, isValid?: boolean }) => {
+    console.log({type, value, isValid})
     switch (type) {
         case INPUT_CHANGE:
             return {
                 ...state,
                 value: value,
                 isValid: isValid,
+                isTouched: true
             }
         case LOST_FOCUS:
             return {
@@ -66,6 +67,7 @@ const FormControl = ({
             || ((keyboardType === "numeric" || keyboardType === "number-pad" || keyboardType === "decimal-pad") && !numberRegex.test(input))) {
             isValid = false;
         }
+        console.log('dispatching')
 
         dispatch({type: INPUT_CHANGE, value: input, isValid: isValid})
     }
@@ -93,8 +95,8 @@ const FormControl = ({
                 autoCapitalize={autoCapitalize}
                 onChangeText={stringChangeHandler}
                 autoCompleteType={autoCompleteType}
-                onBlur={lostFocusHandler}
                 secureTextEntry={secureTextEntry}
+                onBlur={lostFocusHandler}
             />
             {state.isTouched && !state.isValid &&
             <Text style={styles.warning}>Please input a valid {label.toLowerCase()}</Text>}

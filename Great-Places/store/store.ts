@@ -1,4 +1,4 @@
-import {applyMiddleware, combineReducers, createStore} from "redux";
+import {applyMiddleware, combineReducers, compose, createStore} from "redux";
 import placesReducer from "./reducers/places.reducer";
 import createSagaMiddleware from "redux-saga";
 import {all} from "redux-saga/effects";
@@ -11,7 +11,8 @@ const rootReducer = combineReducers({
 
 export type RootState = ReturnType<typeof rootReducer>
 
-export const store = createStore(rootReducer, applyMiddleware(sagaMiddleware));
+const composeEnhancers = (window as any).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+export const store = createStore(rootReducer, composeEnhancers(applyMiddleware(sagaMiddleware)));
 
 function* rootSaga() {
     yield all([
