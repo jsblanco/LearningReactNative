@@ -1,4 +1,4 @@
-import React, {useCallback, useReducer} from 'react';
+import React, {useCallback, useReducer, useState} from 'react';
 import {Alert, View} from 'react-native';
 import styles from './AddNewPlaceScreen.styles';
 import Text from "../../components/basicComponents/Text/Text";
@@ -7,6 +7,7 @@ import Button from "../../components/basicComponents/Button/Button";
 import {useDispatch} from "react-redux";
 import {StackScreenProps} from "@react-navigation/stack";
 import {addNewPlace} from "../../store/actions/places.actions";
+import H1 from "../../components/basicComponents/H1/H1";
 
 type Props = StackScreenProps<StackNavigation, 'AddNew'>;
 type ReducerStateType = {
@@ -18,6 +19,7 @@ type ReducerStateType = {
     },
     formIsValid: boolean
 }
+
 type ActionsType = {
     type: string,
     value: string,
@@ -61,8 +63,9 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
         inputValidities: {
             title: false,
         },
-        formIsValid: false
+        formIsValid: false,
     })
+    const [formWasSubmitted, setFormWasSubmitted] = useState(false)
 
     const inputHandler = useCallback((key: string, value: string, isValid: boolean) => {
         console.log({key, value, isValid})
@@ -76,27 +79,33 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
 
 
     const saveChanges = useCallback(() => {
+        setFormWasSubmitted(true)
         if (!formState.formIsValid) {
             Alert.alert('Missing inputs', 'Please input all product data, then press Submit', [{text: 'Ok'}])
             return
         }
-       dispatch(addNewPlace.request({title: formState.inputValues.title}))
-    }, [dispatch, formState])
+        dispatch(addNewPlace.request(formState.inputValues.title))
+        navigation.navigate('List')
+    }, [dispatch, formState, formDispatch])
 
     return (
         <View style={styles.screen}>
-            <Text>AddNewPlaceScreen works!</Text>
+            <H1>Add a new place</H1>
             <FormControl
                 label={'Title'}
                 inputName={"title"}
                 value={formState.inputValues.title}
                 isValid={formState.inputValidities.title}
+                formWasSubmitted={formWasSubmitted}
                 inputHandler={inputHandler}
                 minLength={5}
                 required
             />
-
-            <Button onPress={saveChanges}>Save place</Button>
+            <View style={styles.actionRow}>
+                <Button onPress={saveChanges}>
+                    Save place
+                </Button>
+            </View>
         </View>
     )
 }

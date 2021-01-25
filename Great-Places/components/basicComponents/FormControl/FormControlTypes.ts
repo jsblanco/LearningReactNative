@@ -21,6 +21,7 @@ export type FormControlType = {
     value: string,
     isValid: boolean,
     inputHandler: (key: string, value: string, isValid: boolean) => void,
+    formWasSubmitted?: boolean,
     multiline?: boolean,
     keyboardType?: KeyboardType,
     autoCapitalize?: AutoCapitalizeType,

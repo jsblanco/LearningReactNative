@@ -1,6 +1,8 @@
 type StackNavigation = {
     List: undefined
-    Details: undefined
+    Details: {
+        id: string
+    }
     AddNew: undefined
     Map: undefined
 };

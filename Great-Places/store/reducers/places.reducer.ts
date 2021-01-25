@@ -1,7 +1,8 @@
 import * as constants from '../constants/places.constants'
+import {Place} from "../../models/Places/Place";
 
 type StateType = {
-    places: [],
+    places: Place[],
 }
 
 const initialState: StateType = {

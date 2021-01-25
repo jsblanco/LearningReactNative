@@ -38,6 +38,7 @@ const FormControl = ({
                          maxLength,
                          email,
                          required,
+                         formWasSubmitted = false,
                          multiline = false,
                          autoCorrect = true,
                          secureTextEntry = false,
@@ -98,7 +99,7 @@ const FormControl = ({
                 secureTextEntry={secureTextEntry}
                 onBlur={lostFocusHandler}
             />
-            {state.isTouched && !state.isValid &&
+            {formWasSubmitted && !state.isValid &&
             <Text style={styles.warning}>Please input a valid {label.toLowerCase()}</Text>}
         </View>
     )

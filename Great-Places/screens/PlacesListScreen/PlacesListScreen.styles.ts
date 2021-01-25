@@ -4,7 +4,8 @@ export default StyleSheet.create({
     screen: {
         flex: 1,
         width: '100%',
-        justifyContent: 'center',
+        marginTop: 20,
+        // justifyContent: 'center',
         alignItems: 'center',
     },
 })
