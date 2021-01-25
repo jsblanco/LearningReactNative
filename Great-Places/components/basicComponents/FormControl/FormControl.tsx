@@ -7,7 +7,6 @@ import {FormControlType} from "./FormControlTypes";
 const INPUT_CHANGE = 'INPUT_CHANGE';
 const LOST_FOCUS = 'LOST_FOCUS';
 const inputReducer = (state: any, {type, value, isValid}: { type: string, value?: string, isValid?: boolean }) => {
-    console.log({type, value, isValid})
     switch (type) {
         case INPUT_CHANGE:
             return {
@@ -68,7 +67,6 @@ const FormControl = ({
             || ((keyboardType === "numeric" || keyboardType === "number-pad" || keyboardType === "decimal-pad") && !numberRegex.test(input))) {
             isValid = false;
         }
-        console.log('dispatching')
 
         dispatch({type: INPUT_CHANGE, value: input, isValid: isValid})
     }

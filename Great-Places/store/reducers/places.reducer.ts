@@ -10,7 +10,6 @@ const initialState: StateType = {
 }
 
 const placesReducer = (state: StateType = initialState, {type, payload}: { type: string, payload: any }) => {
-    console.log(payload)
     switch (type) {
         case constants.ADD_PLACE_SUCCESS:
             return {...state, places: [payload, ...state.places]}
