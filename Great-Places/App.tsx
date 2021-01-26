@@ -4,11 +4,19 @@ import {StyleSheet, Text, View} from 'react-native';
 import {RootStackNavigation} from "./navigation/RootStackNavigation";
 import {enableScreens} from "react-native-screens"
 import AppLoading from 'expo-app-loading';
-import * as Font from "expo-font";
 import {Provider} from "react-redux";
 import {store} from "./store/store";
+import {dropPlacesDb, init} from './store/db/places.db'
+import * as Font from "expo-font";
 
 enableScreens();
+// dropPlacesDb()
+init()
+    .then(() => console.log('Database initialised'))
+    .catch((e) => {
+        console.error('Database initialisation failed:')
+        console.error(e)
+    })
 
 const fetchFonts = () => Font.loadAsync({
     'openSans': require('./assets/fonts/OpenSans-Regular.ttf'),

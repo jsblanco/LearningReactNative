@@ -11,6 +11,8 @@ const initialState: StateType = {
 
 const placesReducer = (state: StateType = initialState, {type, payload}: { type: string, payload: any }) => {
     switch (type) {
+        case constants.FETCH_PLACES_SUCCESS:
+            return {...state, places: payload}
         case constants.ADD_PLACE_SUCCESS:
             return {...state, places: [payload, ...state.places]}
         default:

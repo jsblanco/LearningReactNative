@@ -1,14 +1,13 @@
-import React from 'react';
-import {useSelector} from "react-redux";
+import React, {useEffect} from 'react';
+import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
-import styles from './PlacesListScreen.styles';
-import {FlatList, Platform, View} from 'react-native';
+import {FlatList, Platform} from 'react-native';
 import {StackScreenProps} from "@react-navigation/stack";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import PlaceListItem from "../../components/PlaceListItem/PlaceListItem";
 import HeaderButton from "../../components/basicComponents/HeaderButton/HeaderButton";
-import H1 from "../../components/basicComponents/H1/H1";
 import {Place} from "../../models/Places/Place";
+import {fetchPlaces} from "../../store/actions/places.actions";
 
 type Props = StackScreenProps<StackNavigation, 'List'>;
 
@@ -23,8 +22,13 @@ const PlacesListScreen = ({route, navigation}: Props) => {
             ),
         });
     }, [navigation]);
-
+    const dispatch = useDispatch()
     const places = useSelector((state: RootState) => state.places.places)
+
+    useEffect(()=>{
+        dispatch(fetchPlaces.request())
+    },[dispatch])
+
     const renderListItems = ({item}: { item: Place }) => {
         return (<PlaceListItem
             onSelect={() => navigation.navigate('Details', {id: item.id})}

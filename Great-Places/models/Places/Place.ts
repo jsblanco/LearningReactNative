@@ -1,23 +1,18 @@
 export class Place {
-    private _id: string
-    private _title: string
-    private _imageUri: string
+    public id: string
+    public title: string
+    public address: string
+    public imageUri: string
+    public lat: number
+    public lng: number
 
-    constructor(id: string, title: string, imageUri: string) {
-        this._id = id;
-        this._title = title;
-        this._imageUri = imageUri;
+    constructor(id: string, title: string, address: string, imageUri: string, lat: number, lng: number) {
+        this.id = id;
+        this.title = title;
+        this.address = address;
+        this.imageUri = imageUri;
+        this.lat = lat;
+        this.lng = lng;
     }
 
-    get id(): string {
-        return this._id;
-    }
-
-    get title(): string {
-        return this._title;
-    }
-
-    get imageUri(): string {
-        return this._imageUri;
-    }
 }
