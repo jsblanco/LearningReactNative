@@ -13,8 +13,8 @@ type Props = StackScreenProps<StackNavigation, 'AddNew'>;
 const AddNewPlaceScreen = ({route, navigation}: Props) => {
     const dispatch = useDispatch()
     const [formState, formDispatch] = useReducer(formReducer, {
-        inputValues: {title: '',},
-        inputValidities: {title: false,},
+        inputValues: {title: '', imageUri: ''},
+        inputValidities: {title: false, imageUri: false},
         formIsValid: false,
     })
     const [formWasSubmitted, setFormWasSubmitted] = useState(false)
@@ -29,7 +29,7 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
             Alert.alert('Missing inputs', 'Please input all product data, then press Submit', [{text: 'Ok'}])
             return
         }
-        dispatch(addNewPlace.request(formState.inputValues.title))
+        dispatch(addNewPlace.request(formState.inputValues))
         navigation.navigate('List')
     }, [dispatch, formState, formDispatch])
 
@@ -46,7 +46,7 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
                 minLength={5}
                 required
             />
-            <ImageSelector />
+            <ImageSelector onImageTaken={((imageUri: string)=>inputHandler('imageUri', imageUri, true))}/>
             <View style={styles.actionRow}>
                 <Button onPress={saveChanges}>
                     Save place
@@ -62,9 +62,11 @@ export default AddNewPlaceScreen;
 type ReducerStateType = {
     inputValues: {
         title: string,
+        imageUri: string,
     },
     inputValidities: {
         title: boolean,
+        imageUri: boolean,
     },
     formIsValid: boolean
 }

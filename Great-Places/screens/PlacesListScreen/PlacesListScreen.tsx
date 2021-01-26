@@ -28,7 +28,7 @@ const PlacesListScreen = ({route, navigation}: Props) => {
     const renderListItems = ({item}: { item: Place }) => {
         return (<PlaceListItem
             onSelect={() => navigation.navigate('Details', {id: item.id})}
-            image={'https://cdn.contexttravel.com/image/upload/c_fill,q_60,w_2600/v1549318570/production/city/hero_image_2_1549318566.jpg'}
+            image={item.imageUri}
             title={item.title}
             address={item.title}
         />)

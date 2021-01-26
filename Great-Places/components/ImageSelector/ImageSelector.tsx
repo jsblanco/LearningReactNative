@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import {Alert, View, Image} from 'react-native';
+import {Alert, View, Image, TouchableOpacity} from 'react-native';
 import styles from './ImageSelector.styles';
 import Text from "../../components/basicComponents/Text/Text";
 import Button from "../../components/basicComponents/Button/Button";
@@ -33,23 +33,20 @@ const ImageSelector = (props: any) => {
             aspect: [4, 3],
             quality: 0.5,
         })
-        console.log('//////////////////////////////////')
-        setPickedImage(image.uri)
-        console.log(pickedImage)
-
+        if (!image.cancelled) {
+            setPickedImage(image.uri);
+            props.onImageTaken(image.uri);
+        }
     }
 
     return (
         <View style={styles.screen}>
-            <View style={styles.imagePreview}>
+            <TouchableOpacity style={styles.imagePreview} onPress={openCameraHandler}>
                 {!!pickedImage
                     ? <Image style={styles.image} source={{uri: pickedImage}}/>
-                    : <Text>Please pick an image</Text>
+                    : <Text>Open camera</Text>
                 }
-            </View>
-            <Button onPress={openCameraHandler}>
-                Open camera
-            </Button>
+            </TouchableOpacity>
         </View>
     )
 }
