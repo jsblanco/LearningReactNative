@@ -8,7 +8,6 @@ export class PlaceAdapter implements Adapter<Place> {
     }
 
     adapt(item: any) {
-
-        return new Place(item.id, item.title, item.imageUri, item.address, item.lat, item.lng)
+        return new Place(item.id, item.title, item.address, item.imageUri, item.lat, item.lng)
     }
 }

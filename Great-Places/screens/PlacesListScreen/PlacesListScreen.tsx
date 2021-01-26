@@ -1,13 +1,13 @@
 import React, {useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
 import {RootState} from "../../store/store";
 import {FlatList, Platform} from 'react-native';
+import {useDispatch, useSelector} from "react-redux";
 import {StackScreenProps} from "@react-navigation/stack";
 import {HeaderButtons, Item} from "react-navigation-header-buttons";
 import PlaceListItem from "../../components/PlaceListItem/PlaceListItem";
 import HeaderButton from "../../components/basicComponents/HeaderButton/HeaderButton";
-import {Place} from "../../models/Places/Place";
 import {fetchPlaces} from "../../store/actions/places.actions";
+import {Place} from "../../models/Places/Place";
 
 type Props = StackScreenProps<StackNavigation, 'List'>;
 
@@ -22,12 +22,12 @@ const PlacesListScreen = ({route, navigation}: Props) => {
             ),
         });
     }, [navigation]);
-    const dispatch = useDispatch()
     const places = useSelector((state: RootState) => state.places.places)
+    const dispatch = useDispatch()
 
-    useEffect(()=>{
+    useEffect(() => {
         dispatch(fetchPlaces.request())
-    },[dispatch])
+    }, [dispatch])
 
     const renderListItems = ({item}: { item: Place }) => {
         return (<PlaceListItem

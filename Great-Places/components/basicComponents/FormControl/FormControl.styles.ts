@@ -4,8 +4,10 @@ export default StyleSheet.create({
     screen: {
         flex: 1,
         width: '100%',
-        justifyContent: 'center',
+        paddingVertical: 15,
+        paddingHorizontal: 20,
         alignItems: 'center',
+        justifyContent: 'center',
     },
     formControl: {
         width: '100%',

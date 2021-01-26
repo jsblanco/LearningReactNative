@@ -12,7 +12,6 @@ import * as Font from "expo-font";
 enableScreens();
 // dropPlacesDb()
 init()
-    .then(() => console.log('Database initialised'))
     .catch((e) => {
         console.error('Database initialisation failed:')
         console.error(e)

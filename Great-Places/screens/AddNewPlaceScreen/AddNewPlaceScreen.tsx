@@ -8,6 +8,7 @@ import H1 from "../../components/basicComponents/H1/H1";
 import ImageSelector from "../../components/ImageSelector/ImageSelector";
 import Button from "../../components/basicComponents/Button/Button";
 import FormControl from "../../components/basicComponents/FormControl/FormControl";
+import LocationPicker from "../../components/LocationPicker/LocationPicker";
 
 type Props = StackScreenProps<StackNavigation, 'AddNew'>;
 const AddNewPlaceScreen = ({route, navigation}: Props) => {
@@ -47,6 +48,7 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
                 required
             />
             <ImageSelector onImageTaken={((imageUri: string)=>inputHandler('imageUri', imageUri, true))}/>
+            <LocationPicker/>
             <View style={styles.actionRow}>
                 <Button onPress={saveChanges}>
                     Save place
