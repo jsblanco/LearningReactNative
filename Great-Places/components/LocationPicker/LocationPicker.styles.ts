@@ -13,5 +13,11 @@ export default StyleSheet.create({
         borderWidth: 1,
         justifyContent: "center",
         alignItems: "center",
+    },
+    actionsRow: {
+        paddingTop: 20,
+        flexDirection: 'row',
+        justifyContent: 'space-evenly',
+        width: '100%',
     }
 })

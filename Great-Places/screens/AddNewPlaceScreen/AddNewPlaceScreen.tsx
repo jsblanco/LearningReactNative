@@ -1,5 +1,5 @@
 import React, {useCallback, useReducer, useState} from 'react';
-import {Alert, View} from 'react-native';
+import {Alert, ScrollView, View} from 'react-native';
 import styles from './AddNewPlaceScreen.styles';
 import {useDispatch} from "react-redux";
 import {StackScreenProps} from "@react-navigation/stack";
@@ -35,26 +35,28 @@ const AddNewPlaceScreen = ({route, navigation}: Props) => {
     }, [dispatch, formState, formDispatch])
 
     return (
-        <View style={styles.screen}>
-            <H1>Add a new place</H1>
-            <FormControl
-                label={'Title'}
-                inputName={"title"}
-                value={formState.inputValues.title}
-                isValid={formState.inputValidities.title}
-                formWasSubmitted={formWasSubmitted}
-                inputHandler={inputHandler}
-                minLength={5}
-                required
-            />
-            <ImageSelector onImageTaken={((imageUri: string)=>inputHandler('imageUri', imageUri, true))}/>
-            <LocationPicker/>
-            <View style={styles.actionRow}>
-                <Button onPress={saveChanges}>
-                    Save place
-                </Button>
+        <ScrollView>
+            <View style={styles.screen}>
+                <H1>Add a new place</H1>
+                <FormControl
+                    label={'Title'}
+                    inputName={"title"}
+                    value={formState.inputValues.title}
+                    isValid={formState.inputValidities.title}
+                    formWasSubmitted={formWasSubmitted}
+                    inputHandler={inputHandler}
+                    minLength={5}
+                    required
+                />
+                <ImageSelector onImageTaken={((imageUri: string) => inputHandler('imageUri', imageUri, true))}/>
+                <LocationPicker/>
+                <View style={styles.actionRow}>
+                    <Button onPress={saveChanges}>
+                        Save place
+                    </Button>
+                </View>
             </View>
-        </View>
+        </ScrollView>
     )
 }
 

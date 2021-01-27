@@ -6,11 +6,14 @@ import Button from "../../components/basicComponents/Button/Button";
 import * as Location from 'expo-location'
 import * as Permissions from 'expo-permissions'
 import colours from "../../constants/colours";
+import MapPreview from "../MapPreview/MapPreview";
+import {useNavigation} from "@react-navigation/native";
 
 
 const LocationPicker = (props: any) => {
     const [isFetching, setIsFetching] = useState(false);
-    const [pickedLocation, setPickedLocation]= useState<{lat: number, lng: number}>();
+    const [pickedLocation, setPickedLocation] = useState<{ lat: number, lng: number }>();
+    const navigation = useNavigation()
 
     const verifyPermissions = async () => {
         const result = await Permissions.askAsync(Permissions.LOCATION);
@@ -32,7 +35,6 @@ const LocationPicker = (props: any) => {
         try {
             setIsFetching(true)
             const currentLocation = await Location.getCurrentPositionAsync();
-            console.log(currentLocation)
             setPickedLocation({lat: currentLocation.coords.latitude, lng: currentLocation.coords.longitude})
         } catch (e) {
             Alert.alert('Could not determine location', 'There was a problem determining your location. Please try again later.', [{text: 'Ok'}])
@@ -40,14 +42,21 @@ const LocationPicker = (props: any) => {
         setIsFetching(false)
     }
 
+    const pickOnMapHandler = () => {
+        navigation.navigate('Map')
+    }
+
     return (
         <View style={styles.screen}>
-            <View style={styles.mapPreview}>
+            <MapPreview onPress={pickOnMapHandler} location={pickedLocation} style={styles.mapPreview}>
                 {isFetching
                     ? <ActivityIndicator color={colours.brightAccent} size={"large"}/>
                     : <Text>No location chosen</Text>}
+            </MapPreview>
+            <View style={styles.actionsRow}>
+                <Button onPress={pickOnMapHandler}>Pick on a map</Button>
+                <Button onPress={getLocationHandler}>Find your location</Button>
             </View>
-            <Button onPress={getLocationHandler}>Select location</Button>
         </View>
     )
 }
