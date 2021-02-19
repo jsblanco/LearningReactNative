@@ -17,7 +17,7 @@ const PlacesListScreen = ({route, navigation}: Props) => {
             headerRight: () => (
                 <HeaderButtons HeaderButtonComponent={HeaderButton}>
                     <Item title={'Add place!'} iconName={Platform.OS === 'android' ? 'md-add' : 'ios-add'}
-                          onPress={() => navigation.navigate('AddNew')}/>
+                          onPress={() => navigation.navigate('AddNew', {})}/>
                 </HeaderButtons>
             ),
         });
@@ -34,7 +34,7 @@ const PlacesListScreen = ({route, navigation}: Props) => {
             onSelect={() => navigation.navigate('Details', {id: item.id})}
             image={item.imageUri}
             title={item.title}
-            address={item.title}
+            address={item.address}
         />)
     }
 
