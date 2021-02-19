@@ -4,7 +4,7 @@ import styles from './MapPreview.styles';
 import ENV from "../../env"
 
 const MapPreview = ({location, children, style, onPress}:
-                        { location?: { lat: number, lng: number }, children: ReactChild, style: ViewStyle, onPress: ()=>void }) => {
+                        { location?: { lat: number, lng: number }, children: ReactChild, style: ViewStyle, onPress: () => void }) => {
     let imagePreviewUrl;
     if (location) {
         imagePreviewUrl = `https://maps.googleapis.com/maps/api/staticmap?center=${
