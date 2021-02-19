@@ -18,7 +18,10 @@ const PlaceDetailsScreen = ({route, navigation}: Props) => {
         });
     }, [place]);
     if (!place) return <View style={styles.screen}><Text>Place not found</Text></View>;
-    console.log(place)
+    const placeLocation = {lat: place.lat, lng: place.lng}
+    const onMapHandler=()=>{
+        navigation.navigate('Map', {readonly: true, initialLocation: placeLocation})
+    }
 
     return (
         <ScrollView>
@@ -26,7 +29,7 @@ const PlaceDetailsScreen = ({route, navigation}: Props) => {
             <View>
                 <Text style={styles.title}>{place.title}</Text>
                 <Text style={styles.address}>{place.address}</Text>
-                <MapPreview location={{lat: place.lat, lng: place.lng}}>
+                <MapPreview location={placeLocation} onPress={onMapHandler}>
                     <Text>Missing location</Text>
                 </MapPreview>
             </View>

@@ -6,5 +6,9 @@ type StackNavigation = {
     AddNew: {
         selectedLocation?: { lat: number, lng: number }
     }
-    Map: undefined
+    Map:
+        {
+            readonly?: boolean,
+            initialLocation?: { lat: number, lng: number }
+        }
 };

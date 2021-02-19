@@ -59,7 +59,7 @@ const LocationPicker = ({route, onLocationPicked}: { route: Route, onLocationPic
         setIsFetching(false)
     }
 
-    const pickOnMapHandler = () => navigation.navigate('Map');
+    const pickOnMapHandler = () => navigation.navigate('Map', {});
 
 
     return (
