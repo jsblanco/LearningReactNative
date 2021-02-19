@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import colours from "../../constants/colours";
 
 export default StyleSheet.create({
     screen: {
@@ -7,4 +8,11 @@ export default StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
     },
+    headerButton: {
+        marginHorizontal: 20,
+    },
+    headerButtonText: {
+        fontSize: 16,
+        color: 'white'
+    }
 })

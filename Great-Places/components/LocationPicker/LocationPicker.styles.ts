@@ -4,6 +4,7 @@ export default StyleSheet.create({
     screen: {
         width: '100%',
         marginBottom: 20,
+        overflow: 'hidden',
     },
     mapPreview: {
         marginBottom: 10,

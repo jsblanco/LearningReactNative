@@ -1,11 +1,13 @@
-import React, {useState} from 'react';
-import {View} from 'react-native';
+import React, {useCallback, useState} from 'react';
 import MapView, {Marker} from 'react-native-maps';
 import styles from './MapScreen.styles';
-import Text from "../../components/basicComponents/Text/Text";
+import Text from '../../components/basicComponents/Text/Text'
+import {useNavigation} from "@react-navigation/native";
+import {Alert, TouchableOpacity} from "react-native";
 
 const MapScreen = (props: any) => {
     const [selectedLocation, setSelectedLocation] = useState<{ lat: number, lng: number }>()
+    const navigation = useNavigation()
     const mapRegion = {
         latitude: 24.15,
         longitude: 120.67,
@@ -15,6 +17,14 @@ const MapScreen = (props: any) => {
     let markerCoords;
     if (selectedLocation) markerCoords = {latitude: selectedLocation.lat, longitude: selectedLocation.lng}
 
+    const saveCoordinatesHandler = useCallback(() => {
+        if (!selectedLocation) return Alert.alert(
+            'No location chosen',
+            'Please choose a location before saving',
+            [{text: 'ok'}]);
+        navigation.navigate('AddNew', {selectedLocation: selectedLocation})
+    }, [selectedLocation])
+
     const onPressLocation = (event: any) => {
         setSelectedLocation({
             lat: +event.nativeEvent.coordinate.latitude,
@@ -22,8 +32,19 @@ const MapScreen = (props: any) => {
         })
     }
 
+    React.useLayoutEffect(() => {
+        navigation.setOptions({
+            headerRight: () => (
+                <TouchableOpacity style={styles.headerButton} onPress={saveCoordinatesHandler}>
+                    <Text style={styles.headerButtonText}>Save location</Text>
+                </TouchableOpacity>
+            ),
+        });
+    }, [navigation, selectedLocation]);
+
     return (
         <MapView style={styles.screen} region={mapRegion} onPress={onPressLocation}>
+            {/*// @ts-ignore*/}
             {selectedLocation && <Marker coordinate={markerCoords}></Marker>}
         </MapView>
     )

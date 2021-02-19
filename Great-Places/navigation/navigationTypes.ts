@@ -3,6 +3,8 @@ type StackNavigation = {
     Details: {
         id: string
     }
-    AddNew: undefined
+    AddNew: {
+        selectedLocation?: { lat: number, lng: number }
+    }
     Map: undefined
 };
